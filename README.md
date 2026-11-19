@@ -12,6 +12,7 @@ Scripts used to tune a PhoneBox 0.9.19 dashboard for a Samsung Galaxy A32 5G
   `dc-sfx.py` + `dc-sfx-run.vbs` play Discord soundboard sounds.
   `ytm-play.ps1` + `ytm-run.vbs` launch hidden YouTube Music videos.
   `pair-phone.py` + `pair-phone-run.vbs` generate a fresh pairing QR on demand.
+  `pairweb.py` + `pairweb-run.vbs` serve the enhanced settings page on port 8770.
   `agent-post.py` + `agent-post-run.vbs` post to agent endpoints (media controls).
   `rebuild-glass.py` regenerates the AMOLED Liquid Glass overlays.
 
@@ -28,6 +29,21 @@ Scripts used to tune a PhoneBox 0.9.19 dashboard for a Samsung Galaxy A32 5G
 `orientation=landscape`, `theme=amoled`, `keepAwake=true`, `idleDimMin=0`,
 `artTint=false`, `pixelShift=false`; appearance `fontScale=105`, `gap=8`,
 `padding=10`, `radius=22`, `pagePadding=8`, `shadow=false`, `border=false`.
+
+## Enhanced settings page (Connect Device button)
+
+The agent's `settings.html` is compiled into `PhoneBoxAgent.exe`, so the header
+button is added by a tiny read-only proxy:
+
+- Open **http://127.0.0.1:8770/** (desktop shortcut: `PhoneBox Settings`).
+- A **📱 Connect Device** button sits immediately after the language selector.
+  It opens a dialog with two QR codes: **1 · Pair this PC** (scan in PhoneBox →
+  Pair / Add PC) and **2 · Add another device** (downloads the app on a new phone
+  or tablet, then pair it with the first code).
+- `pairweb.py` forwards all requests to the real agent on `127.0.0.1:8765` and
+  strips browser origin headers so the agent's CSRF check still passes.
+  `PhoneBox Pair Web.lnk` in Startup keeps it running after a PC restart.
+- The original settings page remains at `http://127.0.0.1:8765/`.
 
 ## Pairing
 
