@@ -51,10 +51,9 @@ The "Pair Phone (QR)" launcher on the dashboard runs `pair-phone-run.vbs`, which
 asks the agent for a fresh code and opens the QR on the PC screen to scan.
 `add_pair_button.py` adds that shortcut and launcher entry.
 
-The phone only stores the PC's IP at pairing time and does not refresh it over
-Wi-Fi, so a DHCP address change breaks the connection until you re-pair.
-`set-static-ip.ps1` (run elevated) pins the PC to `192.168.1.102` so this does
-not happen again. Adjust the address for your own network before using it.
+The phone stores the PC's IP at pairing time and does not refresh it over Wi-Fi.
+The PC uses normal DHCP addressing; if the router hands out a new IP, just click
+**📱 Connect Device** in the enhanced settings page and scan the fresh QR.
 
 ## Notes
 
