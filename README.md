@@ -13,6 +13,8 @@ Scripts used to tune a PhoneBox 0.9.19 dashboard for a Samsung Galaxy A32 5G
   `ytm-play.ps1` + `ytm-run.vbs` launch hidden YouTube Music videos.
   `pair-phone.py` + `pair-phone-run.vbs` generate a fresh pairing QR on demand.
   `pairweb.py` + `pairweb-run.vbs` serve the enhanced settings page on port 8770.
+  `PairTray.exe` (+ `pairtray.cs`, `phonebox-pair.ico`) is the hidden-icons tray
+  icon; clicking it opens the Connect Device dialog directly.
   `agent-post.py` + `agent-post-run.vbs` post to agent endpoints (media controls).
   `rebuild-glass.py` regenerates the AMOLED Liquid Glass overlays.
 
@@ -43,6 +45,11 @@ button is added by a tiny read-only proxy:
 - `pairweb.py` forwards all requests to the real agent on `127.0.0.1:8765` and
   strips browser origin headers so the agent's CSRF check still passes.
   `PhoneBox Pair Web.lnk` in Startup keeps it running after a PC restart.
+- **Tray icon:** `PairTray.exe` sits in the hidden icons area. Left-click it (or
+  use its right-click menu → **Pair / Connect Device**) to open the dialog with
+  fresh QR codes. It starts the proxy automatically if it isn't running.
+  `PhoneBox Pair Tray.lnk` in Startup restores it after a PC restart.
+  Rebuild it with `scripts/build-pairtray.ps1` (uses the built-in .NET `csc.exe`).
 - The original settings page remains at `http://127.0.0.1:8765/`.
 
 ## Pairing
